@@ -1,0 +1,85 @@
+#include <iostream>
+#include <vector> //https://cplusplus.com/reference/vector/vector/
+using namespace std;
+/*
+A valley is a sequence of consecutive steps below sea level, starting with a step down from sea level and ending with a step up to sea level.
+Path is a string of 'U' and 'D' where 'U' goes up one step and 'D' goes down one step 
+*/
+int countingValleys(int steps, string path) {
+    int result=0;
+    int distance=0;
+    for(int i=0;i<steps;i++){
+        if(path[i]=='U')
+           distance++;
+        else
+            distance--;
+        
+        if(distance==0&&path[i]=='U')
+            result++;
+        
+    } 
+    return result;
+}
+/*
+Function Description
+Complete the jumpingOnClouds function in the editor below.
+jumpingOnClouds has the following parameter(s):
+int c[n]: an array of binary integers
+Returns
+int: the minimum number of jumps required
+Input Format
+The first line contains an integer n, the total number of clouds. The second line contains n space-separated binary integers 
+describing clouds c[i] where 0<=i<n.
+*/
+int jumpingOnClouds(vector<int> c) {
+int result =0;
+for(int i=0;i<=c.size();i++){
+    if(c[i+2]==1){
+        i=i+0;
+    }else{
+        i=i+1;
+    }
+    result++;
+}
+return --result;
+}
+/*
+long repeatedString
+Returns
+int: the frequency of a in the substring
+Input Format
+The first line contains a single string, . 
+The second line contains an integer, .
+*/
+long repeatedString(string s, long n) {
+    long result=0;
+    long s_length=s.size();
+    long rem= n%s_length;
+    std::cout <<rem<<endl;
+    for(long i=0;i<rem;i++){
+        if('a'==s[i%s_length]){
+            result++;
+        }
+    }
+    n=n-rem;
+    long hold=0;
+    for(long i=0;i<s_length;i++){
+        if('a'==s[i%s_length]){
+            hold++;
+        }
+    }
+    std::cout <<hold<<endl;
+    result=  result+ hold*n/s_length;   
+    
+    return result;
+}
+
+
+int main()
+{
+    
+    std::cout <<  countingValleys(3,"DUD")<<endl;
+    std::cout << repeatedString("aba",10);
+    return 0;
+
+}
