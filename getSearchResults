@@ -1,0 +1,51 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<vector<string>> getSearchResults(vector<string> words, vector<string> queries) {
+vector<vector<string>> results(queries.size()); 
+
+    for(int i=0;i<queries.size();i++){
+        bool q_check[queries[i].length()];
+        char q[queries[i].length()];
+        for(int j=0;j<queries[i].length();j++){
+            q[j] = queries[i][j];
+        }
+        for(int j=0;j<words.size();j++){
+            if(words[j].length()==queries[i].length()){ //Check if both string are the same length
+                bool check1=1;
+                for(int k=0; k<queries[i].length()&&check1;k++){ //goes through the word length
+                    bool check2=1;
+                    for(int x=0; x<queries[i].length()&&check2;x++){
+                        if(q[x]==words[j][k]&&!q_check[k]){
+                            q_check[k]=1;
+                            check2=0;
+                            check1=1;
+                            cout<<words[j][k]<<endl;
+                        }else{
+                            check1=0;
+
+                            cout<<words[j][k];
+                        }
+                    }
+                }
+
+                if(check1){
+                    results[i].push_back(words[j]);
+
+                }
+
+            }
+        }        
+    }
+    
+return results;
+}
+
+int main()
+{
+    cout<<"Hello World"<<endl;
+   vector<vector<string>> c= getSearchResults({"ghe","cat"},{"tac"});
+
+    return 0;
+}
